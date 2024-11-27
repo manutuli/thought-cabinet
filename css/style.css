@@ -1,0 +1,47 @@
+
+
+/* body, body > * {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+} */
+
+/* :root {} */
+/* main > * {} */
+/* button {} */
+
+div {
+    display: flex;
+    min-width: 150px;
+    min-height: 150px;
+}
+button {
+    min-width: 150px;
+    min-height: 50px;
+}
+article {
+    outline: 1px solid pink;
+    transform: rotate(45deg);
+    width: 50px;
+    height: 50px;
+    margin: 30px;
+}
+section {
+    outline: 1px solid gray;
+}
+input {
+    outline: 1px solid gainsboro;
+}
+/* ul {} */
+li {
+    /* list-style: none; */
+}
+main {
+    /* outline: 1px solid lime; */
+    display: flex;
+    justify-content: space-around;
+    height: 50vh;
+}
+
+/* .thought-list {} */
+/* .thought-list-item {} */
