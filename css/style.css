@@ -10,11 +10,11 @@
 /* main > * {} */
 /* button {} */
 
-div {
+/* div {
     display: flex;
     min-width: 150px;
     min-height: 150px;
-}
+} */
 button {
     min-width: 150px;
     min-height: 50px;
@@ -32,6 +32,10 @@ section {
 input {
     outline: 1px solid gainsboro;
 }
+dialog::backdrop {
+    background-color: linear-gradient(red, blue, 50%);
+    background: blur(50%);
+}
 /* ul {} */
 li {
     /* list-style: none; */
@@ -40,8 +44,18 @@ main {
     /* outline: 1px solid lime; */
     display: flex;
     justify-content: space-around;
-    height: 50vh;
+    height: 100vh;
 }
-
+.thought-color-block {
+    /* display: flex; */
+    width: 150px;
+    height: 150px;
+}
 /* .thought-list {} */
 /* .thought-list-item {} */
+.thought-slot-title {
+    transform: rotate(-45deg);
+}
+*[data-thought-id] {
+    outline: 2px solid red;
+}

@@ -5,37 +5,50 @@ import { fetchAPI } from "../../model/model.js"
 // 
 export function eventsFactory(){
     const { getThoughtById, } = fetchAPI
-    const { state, publish } = store()
+    const { state, publish, dispatch } = store()
         // 
     function handleItemClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
-        console.log("id : ", id)
-        const promise = getThoughtById(id)
+        if (!id) return
         // action
+        const promise = getThoughtById(id)
         promise.then((info) => {
-            publish("itemClick", {...info})
+            if (!info) return
+            publish("itemClick", dispatch("itemClick", {...info}))
         })
     }
     // 
     function handleSlotClick(e){
         e.preventDefault()
-        console.log(e.target)
-        // if (slot is empty) return
+        const button = document.querySelector("button.thought-info-section")
+        const id = button.dataset.thoughtId
+        if (!id) return
+        button.dataset.thoughtId = ""
+        // action
+        const promise = getThoughtById(id)
+        promise.then((info) => {
+            if (!info) return
+            publish("itemClick", dispatch("itemClick", {...info}))
+        })
     }
     // 
     function handleInternalize(e){
         e.preventDefault()
         console.log(e.target)
-        // document.querySelector("thought-")
-        // e.target.replaceWith() 
+        const id = e.target.dataset.thoughtId
+        if (!id) return
+        const promise = getThoughtById(id)
+        promise.then((info) => {
+            if (!info) return
+            publish("fillSlot", dispatch("fillSlot", {...info}))
+            publish("internalize", dispatch("internalize", {...info}))
+        })
     }
     // 
     function handleForget(e){
         e.preventDefault()
         console.log(e.target)
-        // document.querySelector("thought-")
-        // e.target.replaceWith() 
     }
     // 
     function handleSubmit(e){
@@ -50,7 +63,7 @@ export function eventsFactory(){
         // const thoughtsList = []
         // thoughtsList.push(thought)
         // publish("submit", {thoughtsList : thoughtsList})
-        publish("closeForm", {...state, isFormView : false})
+        publish("closeForm", {isFormView : false})
     }
     // 
     function handleCloseForm(e){

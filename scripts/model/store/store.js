@@ -4,24 +4,49 @@ let state = {
     isFormView : false,
     isDarkmode : false,
     thoughtsList : [],
-    infoData : {
-        image : "ff0011",
-        title : "thought name",
-        description : 
-        `long formatted description 
-         of the thought`,
-    },
+    slotsList : [],
+    thoughtData : {},
 }
 
 let observers = {}
 
-export function store(){
-    // 
-    function subscribe(action, subscriber){
-        if (!observers[action]) {
-            observers[action] = []
+function reducer(type, newState){
+    switch (type) {
+        case "itemClick" : {
+            const {...thoughtData} = newState
+            return ({...state, thoughtData})
         }
-        observers[action].push(subscriber)
+        case "internalize" : {
+            const [...slotsList] = state.slotsList
+            ! slotsList.includes(newState.id)  
+            ? slotsList.push(newState.id)
+            : null
+            return ({...state, slotsList})
+        }
+        case "fillSlot" : {
+            const [...thoughtsList] = state.thoughtsList
+            ! thoughtsList.includes(newState.id)  
+            ? thoughtsList.push(newState.id)
+            : null
+            return ({...state, thoughtsList})
+        }
+    }
+}
+
+
+export function store(){
+    function dispatch(type, action){
+        const newState = reducer(type, action)
+        state = newState
+        console.log(type, state)
+        return state
+    }
+    // 
+    function subscribe(type, subscriber){
+        if (!observers[type]) {
+            observers[type] = []
+        }
+        observers[type].push(subscriber)
     }
     // 
     // function unsubscribe(action){
@@ -29,12 +54,11 @@ export function store(){
     //     const func = observers[action].shift()
     // }
     // 
-    function publish(action, newState){
-        if (!observers[action]) return
-        observers[action].forEach(observer => observer(newState))
-        // state = {...state, ...newState}
-        console.log(action, state)
+    function publish(type, newState){
+        if (!observers[type]) return
+        observers[type].forEach(observer => observer(newState))
     }
-    return { publish, subscribe, state }
+    // 
+    return { publish, subscribe, dispatch, state }
 }
 

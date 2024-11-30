@@ -36,36 +36,51 @@ export function componentsFactory(){
     function createSlot(){
         const slot = document.createElement("article")
         const span = document.createElement("div")
-        const title = document.createElement("h3")
+        const title = document.createElement("h6")
         slot.classList.add("thought-slot")
         span.classList.add("thought-slot-title")
         span.appendChild(title)
         slot.appendChild(span)
-        // event 
-        slot.addEventListener("click", handleSlotClick)
         // 
+        return slot
+    }
+    function selectSlot(){
+        const slots = Array.from(document.querySelectorAll(".thought-slot.empty"))
+        const slot = slots
+            .sort((a, b) => a.dataset.slotId > b.dataset.slotId)
+            .pop()
         return slot
     }
 
     // ------ sections -------
     // 
-    function createSlotSection(thoughtsList){
+    function createSlotSection(){
         const section = document.createElement("section");
         section.classList.add("thought-slots-section")
-        function fillSlot(thought, slot){
-            slot.dataset.id = thought.id
-            const title = slot.querySelector(".thought-slot-title > h3")
-            title.textContent = thought.title
-            slot.style.backgroundColor = `${thought.image}`
-        }
-        // 
+        const slots = []
         for (let i = 0; i < 8; i++) {
             const slot = createSlot()
-            if (thoughtsList[i]) {
-                fillSlot(thoughtsList[i], slot)
-            }
-            section.appendChild(slot)
+            slot.classList.add("empty")
+            slot.dataset.slotId = i+1
+            // event 
+            slot.addEventListener("click", handleSlotClick)
+            slots.push(slot)
         }
+        slots.forEach(slot => section.appendChild(slot))
+        // action
+        function fillSlot({thoughtData, slotsList}){
+            const {image, name, id} = thoughtData
+            const slot = selectSlot()
+            console.log(slotsList.includes(id))
+            if (!slot) return;
+            // if (slotsList.includes(id)) return;
+            const title = slot.querySelector(".thought-slot-title > h6")
+            title.textContent = name
+            // slot.dataset.id = id
+            slot.style.backgroundColor = `${image}`    
+            slot.classList.remove("empty")
+        }
+        subscribe("fillSlot", fillSlot)
         // 
         return section
     }
@@ -84,16 +99,19 @@ export function componentsFactory(){
             title.dataset.thoughtId = thought.id
             title.addEventListener("click", handleItemClick)
             list.appendChild(item)
-            // 
         })
         // action 
-        function itemClick(info){
-            const image = document.querySelector(".thought-color-block")
+        function itemClick({thoughtData}){
+            const {image, id, description, name} = thoughtData
+            const img = document.querySelector(".thought-color-block")
+            const button = document.querySelector("button.thought-info-section")
             const title = document.querySelector(".thought-info-block")
-            const description = document.querySelector(".thought-title-block")
-            image.style.backgroundColor = `${info.image}`
-            title.textContent = info.title
-            description.textContent = info.description
+            const text = document.querySelector(".thought-title-block")
+            button.textContent = "Internalize this thought."
+            button.dataset.thoughtId = id
+            img.style.backgroundColor = `${image}`
+            title.textContent = name
+            text.textContent = description
         }
         subscribe("itemClick", itemClick)
         section.appendChild(list)
@@ -108,7 +126,10 @@ export function componentsFactory(){
         const text = document.createElement("p")
         const description = document.createElement("div")
         const btn = document.createElement("button")
-        // 
+        // action 
+        subscribe("internalize", (state)=> {
+            // 
+        })
         section.classList.add("card", "thought-info-section")
         image.classList.add("card-img-top", "thought-color-block")
         title.classList.add("card-title", "thought-title-block")
@@ -171,7 +192,7 @@ export function componentsFactory(){
     // 
     function gameUI(thoughtsList){
         const main = document.createElement("main")
-        const slots = createSlotSection(thoughtsList)
+        const slots = createSlotSection()
         const list = createListSection(thoughtsList)
         const info = createInfoSection()
         const button = createFormButton()
