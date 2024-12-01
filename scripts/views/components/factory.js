@@ -62,21 +62,24 @@ export function componentsFactory(){
             const slot = createSlot()
             slot.classList.add("empty")
             slot.dataset.slotId = i+1
-            // event 
             slot.addEventListener("click", handleSlotClick)
             slots.push(slot)
         }
         slots.forEach(slot => section.appendChild(slot))
         // action
-        function fillSlot({thoughtData, slotsList}){
-            const {image, name, id} = thoughtData
+        function fillSlot({thoughtData}){
             const slot = selectSlot()
-            console.log(slotsList.includes(id))
+            const {image, name, id} = thoughtData
+            // 
             if (!slot) return;
-            // if (slotsList.includes(id)) return;
+            const item = document.querySelector(`p[data-thought-id="${id}"]`)
             const title = slot.querySelector(".thought-slot-title > h6")
+            const btn = document.querySelector("button[data-thought-id]")
             title.textContent = name
-            // slot.dataset.id = id
+            // console.log(item)
+            item.dataset.thoughtId = ""
+            btn.dataset.thoughtId = ""
+            slot.dataset.id = id
             slot.style.backgroundColor = `${image}`    
             slot.classList.remove("empty")
         }
@@ -84,7 +87,11 @@ export function componentsFactory(){
         // 
         return section
     }
-    // 
+    /**
+     * 
+     * @param {Array} thoughtsList 
+     * @returns {NodeList}
+     */ 
     function createListSection(thoughtsList){
         const section = document.createElement("section");
         const list = document.createElement("ul")
@@ -126,17 +133,13 @@ export function componentsFactory(){
         const text = document.createElement("p")
         const description = document.createElement("div")
         const btn = document.createElement("button")
-        // action 
-        subscribe("internalize", (state)=> {
-            // 
-        })
         section.classList.add("card", "thought-info-section")
         image.classList.add("card-img-top", "thought-color-block")
         title.classList.add("card-title", "thought-title-block")
         description.classList.add("card-text", "thought-info-block")
         btn.classList.add("btn", "btn-outline-warning", "thought-info-section")
-        // 
         btn.addEventListener("click", handleInternalize)
+        // 
         description.appendChild(text)
         section.appendChild(image)
         section.appendChild(title)

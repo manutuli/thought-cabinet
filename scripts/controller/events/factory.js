@@ -11,7 +11,6 @@ export function eventsFactory(){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
         if (!id) return
-        // action
         const promise = getThoughtById(id)
         promise.then((info) => {
             if (!info) return
@@ -35,14 +34,12 @@ export function eventsFactory(){
     // 
     function handleInternalize(e){
         e.preventDefault()
-        console.log(e.target)
         const id = e.target.dataset.thoughtId
         if (!id) return
         const promise = getThoughtById(id)
         promise.then((info) => {
             if (!info) return
             publish("fillSlot", dispatch("fillSlot", {...info}))
-            publish("internalize", dispatch("internalize", {...info}))
         })
     }
     // 

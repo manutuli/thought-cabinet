@@ -14,21 +14,22 @@ function reducer(type, newState){
     switch (type) {
         case "itemClick" : {
             const {...thoughtData} = newState
+            // 
             return ({...state, thoughtData})
         }
-        case "internalize" : {
-            const [...slotsList] = state.slotsList
-            ! slotsList.includes(newState.id)  
-            ? slotsList.push(newState.id)
-            : null
-            return ({...state, slotsList})
-        }
         case "fillSlot" : {
-            const [...thoughtsList] = state.thoughtsList
-            ! thoughtsList.includes(newState.id)  
-            ? thoughtsList.push(newState.id)
-            : null
-            return ({...state, thoughtsList})
+            let [...slotsList] = state.slotsList
+            console.log({...state, slotsList})
+            // 
+            let temp;
+             !slotsList.includes(parseInt(newState.id))  
+            ? temp = parseInt(newState.id)
+            : temp = null
+            // slotsList.push(temp) 
+            slotsList = slotsList.map((n) => n === parseInt(newState.id) ? n = temp : n = n)
+            console.log({...state, slotsList})
+            // 
+            return ({...state, slotsList})
         }
     }
 }
@@ -38,7 +39,7 @@ export function store(){
     function dispatch(type, action){
         const newState = reducer(type, action)
         state = newState
-        console.log(type, state)
+        // console.log(type, state)
         return state
     }
     // 
