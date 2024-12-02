@@ -6,38 +6,37 @@ import { fetchAPI } from "../../model/model.js"
 export function eventsFactory(){
     const { getThoughtById, } = fetchAPI
     const { state, publish, dispatch } = store()
-        // 
+    // 
     function handleItemClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
-        if (!id) return
+        const status = e.target.dataset.status 
+        // 
+        if (!id || status === "disabled") return
         const promise = getThoughtById(id)
         promise.then((info) => {
-            if (!info) return
+            // 
+            if (!info || status === "disabled") return
             publish("itemClick", dispatch("itemClick", {...info}))
         })
     }
     // 
     function handleSlotClick(e){
         e.preventDefault()
-        const button = document.querySelector("button.thought-info-section")
-        const id = button.dataset.thoughtId
+        const id = e.target.dataset.thoughtId
+        // 
         if (!id) return
-        button.dataset.thoughtId = ""
-        // action
-        const promise = getThoughtById(id)
-        promise.then((info) => {
-            if (!info) return
-            publish("itemClick", dispatch("itemClick", {...info}))
-        })
+        publish("emptySlot", id)
     }
     // 
     function handleInternalize(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
+        // 
         if (!id) return
         const promise = getThoughtById(id)
         promise.then((info) => {
+            // 
             if (!info) return
             publish("fillSlot", dispatch("fillSlot", {...info}))
         })
@@ -45,7 +44,10 @@ export function eventsFactory(){
     // 
     function handleForget(e){
         e.preventDefault()
-        console.log(e.target)
+        const id = e.target.dataset.thoughtId
+        // 
+        if (!id) return
+        publish("forget", id)
     }
     // 
     function handleSubmit(e){

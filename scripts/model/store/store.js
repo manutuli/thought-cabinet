@@ -19,15 +19,16 @@ function reducer(type, newState){
         }
         case "fillSlot" : {
             let [...slotsList] = state.slotsList
-            console.log({...state, slotsList})
-            // 
             let temp;
              !slotsList.includes(parseInt(newState.id))  
             ? temp = parseInt(newState.id)
             : temp = null
-            // slotsList.push(temp) 
             slotsList = slotsList.map((n) => n === parseInt(newState.id) ? n = temp : n = n)
-            console.log({...state, slotsList})
+            // 
+            return ({...state, slotsList})
+        }
+        case "forget" : {
+            let [...slotsList] = state.slotsList
             // 
             return ({...state, slotsList})
         }

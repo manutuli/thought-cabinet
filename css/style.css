@@ -26,6 +26,9 @@ article {
     height: 50px;
     margin: 30px;
 }
+article:hover > div {
+    display: none;
+}
 section {
     outline: 1px solid gray;
 }
@@ -58,4 +61,7 @@ main {
 }
 *[data-thought-id] {
     outline: 2px solid red;
+}
+*[data-status="disabled"] {
+    outline: 2px solid gray;
 }

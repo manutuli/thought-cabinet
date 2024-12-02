@@ -10,6 +10,7 @@ export function componentsFactory(){
         handleInternalize, 
         handleItemClick, 
         handleSlotClick,
+        handleForget,
         handleOpenForm,
         handleCloseForm, } = eventsFactory()
         // 
@@ -49,6 +50,7 @@ export function componentsFactory(){
         const slot = slots
             .sort((a, b) => a.dataset.slotId > b.dataset.slotId)
             .pop()
+            // 
         return slot
     }
 
@@ -56,17 +58,25 @@ export function componentsFactory(){
     // 
     function createSlotSection(){
         const section = document.createElement("section");
-        section.classList.add("thought-slots-section")
+        const container = document.createElement("div")
+        const forgetBtn = document.createElement("button")
+        section.classList.add( "card", "thought-slots-section")
+        container.classList.add( "container", "thought-slots-section")
+        forgetBtn.classList.add("btn", "btn-outline-danger", "forget-thought")
+        forgetBtn.addEventListener("click", handleForget)
         const slots = []
         for (let i = 0; i < 8; i++) {
             const slot = createSlot()
             slot.classList.add("empty")
             slot.dataset.slotId = i+1
+            slot.dataset.status = "active"
             slot.addEventListener("click", handleSlotClick)
             slots.push(slot)
         }
-        slots.forEach(slot => section.appendChild(slot))
-        // action
+        slots.forEach(slot => container.appendChild(slot))
+        section.appendChild(container)
+        section.appendChild(forgetBtn)
+        // actions
         function fillSlot({thoughtData}){
             const slot = selectSlot()
             const {image, name, id} = thoughtData
@@ -74,16 +84,36 @@ export function componentsFactory(){
             if (!slot) return;
             const item = document.querySelector(`p[data-thought-id="${id}"]`)
             const title = slot.querySelector(".thought-slot-title > h6")
-            const btn = document.querySelector("button[data-thought-id]")
+            const btn = document.querySelector("button.thought-info-section")
+            // 
             title.textContent = name
-            // console.log(item)
-            item.dataset.thoughtId = ""
+            item.dataset.status = "disabled"
             btn.dataset.thoughtId = ""
-            slot.dataset.id = id
+            slot.dataset.thoughtId = id
             slot.style.backgroundColor = `${image}`    
             slot.classList.remove("empty")
         }
+        function emptySlot(id){
+            const btn = document.querySelector(`button.forget-thought`)
+            btn.textContent = "Forget this thought"
+            btn.dataset.thoughtId = id
+        }
+        function forget(id){
+            const slot = document.querySelector(`.thought-slot[data-thought-id="${id}"]`)
+            const item = document.querySelector(`p[data-thought-id="${id}"]`)
+            const title = slot.querySelector(".thought-slot-title > h6")
+            const btn = document.querySelector("button.forget-thought")
+            btn.textContent = ""
+            title.textContent = ""
+            item.dataset.status = "active"
+            btn.dataset.thoughtId = ""
+            slot.dataset.thoughtId = ""
+            slot.style.backgroundColor = `#fff`
+            slot.classList.add("empty")
+        }
         subscribe("fillSlot", fillSlot)
+        subscribe("emptySlot", emptySlot)
+        subscribe("forget", forget)
         // 
         return section
     }
@@ -167,7 +197,6 @@ export function componentsFactory(){
         form.appendChild(color)
         form.appendChild(description)
         form.appendChild(btn)
-        // event 
         form.addEventListener("submit", handleSubmit)
         // action
         function submit(state){
@@ -180,7 +209,6 @@ export function componentsFactory(){
     // 
     function createFormButton(){
         const button = document.createElement("button")
-        // event
         button.addEventListener("click", handleOpenForm)
         // action 
         function openForm(currentState){
@@ -198,14 +226,14 @@ export function componentsFactory(){
         const slots = createSlotSection()
         const list = createListSection(thoughtsList)
         const info = createInfoSection()
-        const button = createFormButton()
+        const formBtn = createFormButton()
         const form = createFormModal()
-        button.classList.add("btn", "btn-outline-primary")
+        formBtn.classList.add("btn", "btn-outline-primary")
         info.classList.add("container", "p-5")
         list.classList.add("container", "p-5")
         slots.classList.add("container", "d-flex", "w-50", "flex-wrap")
         main.classList.add("container-fluid", "col-md")
-        list.appendChild(button)
+        list.appendChild(formBtn)
         main.appendChild(slots)
         main.appendChild(list)
         main.appendChild(info)
