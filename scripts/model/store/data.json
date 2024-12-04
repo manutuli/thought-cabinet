@@ -1,38 +1,37 @@
 [
     {
         "id" : 1,
-        "userId" : 10,
         "name" : "the thought title",
         "description" : "thought description",
         "image" : "#daddad",
-        "bonus" : 200,
-        "isActive" : false
+        "bonus" : 200
     },
     {
         "id" : 2,
-        "userId" : 20,
         "name" : "the other title",
         "description" : "the other description",
         "image" : "#aabbcc",
-        "bonus" : 200,
-        "isActive" : false
+        "bonus" : 200
     },
     {
         "id" : 3,
-        "userId" : 30,
         "name" : "and another title",
         "description" : "with another description",
         "image" : "#ffbbcc",
-        "bonus" : 200,
-        "isActive" : false
+        "bonus" : 200
     },
     {
         "id" : 4,
-        "userId" : 40,
         "name" : "yet  another title",
         "description" : "and another description",
         "image" : "#abffbc",
-        "bonus" : 200,
-        "isActive" : false
+        "bonus" : 200
+    },
+    {
+        "id" : 5,
+        "name" : "yet  another title",
+        "description" : "and another description",
+        "image" : "purple",
+        "bonus" : 200
     }
 ]

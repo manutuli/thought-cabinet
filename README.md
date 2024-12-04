@@ -2,36 +2,29 @@
 # Thought-cabinet
 A simple interface inspired by my favourite video game.
 
-## Product functions
-
 ### User page
-  - Internalize thoughts.
-  - Forget internalized thoughts.
-  - Gain bonuses from internalized thoughts.
   - Display funny descriptions.
+  - Internalize thoughts.
+  - Gain bonuses from internalized thoughts.
+  - Forget internalized thoughts.
 
-### Admin page
+### Admin page (uncomment "form-feature" lines in components)
   - Create a new thought.
-  - Get all thought names.
-  - Get all data from any thought.
-  - Change any data from any thought.
+  - update any thought.
   - Delete any thought.
   - Delete all the cabinet.
 
 ## Graphic design
   - CSS colors for each thought.
-  - CSS grid and flexbox.
-  - transform , rotate.
-  - CSS transitions.
+  - bootstrap
 
 ## Constraints and dependencies
   - Vanilla JS App.
   - State Management System.
-  - Data Persistance.
 
 ## planning
-  - sprint 1 : admin page.
-  - sprint 2 : 
+  - sprint 1 : user page.
+  - sprint 2 : admin page.
 
 ## test cases 
   - Given there are thoughts in the list,

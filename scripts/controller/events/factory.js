@@ -10,13 +10,11 @@ export function eventsFactory(){
     function handleItemClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
-        const status = e.target.dataset.status 
+        const status = e.target.dataset.status
         // 
-        if (!id || status === "disabled") return
+        if (status === "disabled") return
         const promise = getThoughtById(id)
         promise.then((info) => {
-            // 
-            if (!info || status === "disabled") return
             publish("itemClick", dispatch("itemClick", {...info}))
         })
     }
@@ -25,8 +23,12 @@ export function eventsFactory(){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
         // 
-        if (!id) return
-        publish("emptySlot", id)
+        const promise = getThoughtById(id)
+        promise.then((info) => {
+            if (!id) return
+            publish("itemClick", dispatch("itemClick", {...info}))
+            publish("emptySlot", dispatch("emptySlot", {id}))
+        })
     }
     // 
     function handleInternalize(e){
@@ -45,23 +47,24 @@ export function eventsFactory(){
     function handleForget(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
+        const bonus = e.target.dataset.bonus
         // 
         if (!id) return
-        publish("forget", id)
+        publish("forget", dispatch("forget", {id, bonus}))
     }
     // 
     function handleSubmit(e){
         e.preventDefault()
         const formData = new FormData(e.target)
-        console.log(formData)
-        // const thought = {
-        //     name : formData.get("thoughtTitle"),
-        //     description : formData.get("thoughtDescription"),
-        //     image : formData.get("thoughtColor"),
-        // }
-        // const thoughtsList = []
-        // thoughtsList.push(thought)
-        // publish("submit", {thoughtsList : thoughtsList})
+        const thought = {
+            id : 2,
+            name : formData.get("thoughtTitle"),
+            description : formData.get("thoughtDescription"),
+            image : formData.get("thoughtColor"),
+            bonus : 200,
+        }
+        // createThought(thought)
+        publish("submit", dispatch("submit", thought))
         publish("closeForm", {isFormView : false})
     }
     // 

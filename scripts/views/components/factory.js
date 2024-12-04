@@ -45,6 +45,7 @@ export function componentsFactory(){
         // 
         return slot
     }
+    // 
     function selectSlot(){
         const slots = Array.from(document.querySelectorAll(".thought-slot.empty"))
         const slot = slots
@@ -69,7 +70,6 @@ export function componentsFactory(){
             const slot = createSlot()
             slot.classList.add("empty")
             slot.dataset.slotId = i+1
-            slot.dataset.status = "active"
             slot.addEventListener("click", handleSlotClick)
             slots.push(slot)
         }
@@ -79,34 +79,43 @@ export function componentsFactory(){
         // actions
         function fillSlot({thoughtData}){
             const slot = selectSlot()
-            const {image, name, id} = thoughtData
+            const {image, name, id, bonus} = thoughtData
             // 
             if (!slot) return;
             const item = document.querySelector(`p[data-thought-id="${id}"]`)
             const title = slot.querySelector(".thought-slot-title > h6")
             const btn = document.querySelector("button.thought-info-section")
-            // 
             title.textContent = name
             item.dataset.status = "disabled"
             btn.dataset.thoughtId = ""
             slot.dataset.thoughtId = id
+            slot.dataset.bonus = bonus
             slot.style.backgroundColor = `${image}`    
             slot.classList.remove("empty")
         }
-        function emptySlot(id){
+        function emptySlot({thoughtData}){
+            const id = thoughtData.id
+            const slot = document.querySelector(`.thought-slot[data-thought-id="${id}"]`)
+            const bonus = slot.dataset.bonus
             const btn = document.querySelector(`button.forget-thought`)
             btn.textContent = "Forget this thought"
             btn.dataset.thoughtId = id
+            btn.dataset.bonus = bonus
+            slot.dataset.bonus = ""
         }
-        function forget(id){
+        function forget({thoughtData}){
+            const id = thoughtData.id
             const slot = document.querySelector(`.thought-slot[data-thought-id="${id}"]`)
             const item = document.querySelector(`p[data-thought-id="${id}"]`)
             const title = slot.querySelector(".thought-slot-title > h6")
-            const btn = document.querySelector("button.forget-thought")
-            btn.textContent = ""
+            const forgetBtn = document.querySelector("button.forget-thought")
+            const internBtn = document.querySelector("button.thought-info-section")
+            forgetBtn.textContent = ""
+            internBtn.textContent = ""
             title.textContent = ""
             item.dataset.status = "active"
-            btn.dataset.thoughtId = ""
+            forgetBtn.dataset.thoughtId = ""
+            forgetBtn.dataset.bonus = ""
             slot.dataset.thoughtId = ""
             slot.style.backgroundColor = `#fff`
             slot.classList.add("empty")
@@ -125,6 +134,9 @@ export function componentsFactory(){
     function createListSection(thoughtsList){
         const section = document.createElement("section");
         const list = document.createElement("ul")
+        const formBtn = createFormButton()
+        formBtn.classList.add("btn", "btn-primary")
+        formBtn.textContent = "New"
         list.classList.add("list-group", "thoughts-list")
         thoughtsList.forEach((thought) => {
             const item = document.createElement("li")
@@ -137,6 +149,8 @@ export function componentsFactory(){
             title.addEventListener("click", handleItemClick)
             list.appendChild(item)
         })
+        // form-feature
+        // list.appendChild(formBtn)
         // action 
         function itemClick({thoughtData}){
             const {image, id, description, name} = thoughtData
@@ -166,14 +180,14 @@ export function componentsFactory(){
         section.classList.add("card", "thought-info-section")
         image.classList.add("card-img-top", "thought-color-block")
         title.classList.add("card-title", "thought-title-block")
-        description.classList.add("card-text", "thought-info-block")
+        text.classList.add("card-text")
+        description.classList.add("thought-info-block")
         btn.classList.add("btn", "btn-outline-warning", "thought-info-section")
         btn.addEventListener("click", handleInternalize)
-        // 
         description.appendChild(text)
         section.appendChild(image)
-        section.appendChild(title)
         section.appendChild(description)
+        section.appendChild(title)
         section.appendChild(btn)
         // 
         return section
@@ -193,14 +207,16 @@ export function componentsFactory(){
         title.classList.add("container")
         color.classList.add("container")
         description.classList.add("container")
+        btn.textContent = "Create"
         form.appendChild(title)
         form.appendChild(color)
         form.appendChild(description)
         form.appendChild(btn)
         form.addEventListener("submit", handleSubmit)
         // action
-        function submit(state){
-            // if (formData)
+        function submit({thoughtsList}){
+            console.log(thoughtsList)
+            // 
          }
         subscribe("submit", submit)
         // 
@@ -226,18 +242,17 @@ export function componentsFactory(){
         const slots = createSlotSection()
         const list = createListSection(thoughtsList)
         const info = createInfoSection()
-        const formBtn = createFormButton()
         const form = createFormModal()
-        formBtn.classList.add("btn", "btn-outline-primary")
         info.classList.add("container", "p-5")
         list.classList.add("container", "p-5")
         slots.classList.add("container", "d-flex", "w-50", "flex-wrap")
         main.classList.add("container-fluid", "col-md")
-        list.appendChild(formBtn)
+        form.classList.add("container", "col-md")
         main.appendChild(slots)
         main.appendChild(list)
         main.appendChild(info)
-        main.appendChild(form)
+        // form-feature 
+        // main.appendChild(form)
         // 
         return main
     }
@@ -247,6 +262,7 @@ export function componentsFactory(){
         const closeBtn = document.createElement("button")
         const form = createThoughtForm()
         closeBtn.classList.add("btn", "btn-danger")
+        closeBtn.textContent = "Cancel"
         closeBtn.addEventListener("click", handleCloseForm)
         ui.appendChild(closeBtn)
         ui.appendChild(form)
@@ -267,7 +283,6 @@ export function componentsFactory(){
         createInfoSection,
         createThoughtForm,
         createFormButton,
-        // createFormModal,
         gameUI,
     }
 }
