@@ -20,7 +20,7 @@ function reducer(type, newState){
         }
         case "fillSlot" : {
             let score = state.score
-            score += newState.bonus
+            score += parseInt(newState.bonus)
             let [...slotsList] = state.slotsList
             let temp;
              !slotsList.includes(parseInt(newState.id))  
@@ -31,20 +31,21 @@ function reducer(type, newState){
                 ? n = temp 
                 : n = n
             )
+            // console.log("score : ", score)
             // 
-            console.log("score : ", score)
             return ({...state, slotsList, score})
         }
         case "emptySlot" : {
-            // return 
-            return ({...state})
+            const {...thoughtData} = newState
+            // 
+            return ({...state, thoughtData})
         }
         case "forget" : {
             let score = state.score
             score = score - parseInt(newState.bonus)
             let [...slotsList] = state.slotsList
+            // console.log("score : ", score)
             // 
-            console.log("score : ", score)
             return ({...state, slotsList, score})
         }
         case "submit" : {

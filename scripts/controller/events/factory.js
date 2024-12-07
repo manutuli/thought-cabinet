@@ -15,6 +15,8 @@ export function eventsFactory(){
         if (status === "disabled") return
         const promise = getThoughtById(id)
         promise.then((info) => {
+            // 
+            if (!info) return
             publish("itemClick", dispatch("itemClick", {...info}))
         })
     }
@@ -22,12 +24,14 @@ export function eventsFactory(){
     function handleSlotClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
+        console.log("id : ", id)
         // 
+        if (!id) return
         const promise = getThoughtById(id)
         promise.then((info) => {
-            if (!id) return
-            publish("itemClick", dispatch("itemClick", {...info}))
-            publish("emptySlot", dispatch("emptySlot", {id}))
+            // 
+            if (!info) return
+            publish("emptySlot", dispatch("emptySlot", {...info}))
         })
     }
     // 

@@ -93,18 +93,24 @@ export function componentsFactory(){
             slot.style.backgroundColor = `${image}`    
             slot.classList.remove("empty")
         }
+        // 
         function emptySlot({thoughtData}){
             const id = thoughtData.id
+            // 
+            if (!id) return 
             const slot = document.querySelector(`.thought-slot[data-thought-id="${id}"]`)
-            const bonus = slot.dataset.bonus
             const btn = document.querySelector(`button.forget-thought`)
+            const bonus = slot.dataset.bonus
             btn.textContent = "Forget this thought"
             btn.dataset.thoughtId = id
             btn.dataset.bonus = bonus
-            slot.dataset.bonus = ""
+            slot.dataset.bonus = 0
         }
+        // 
         function forget({thoughtData}){
             const id = thoughtData.id
+            // 
+            if (!id) return 
             const slot = document.querySelector(`.thought-slot[data-thought-id="${id}"]`)
             const item = document.querySelector(`p[data-thought-id="${id}"]`)
             const title = slot.querySelector(".thought-slot-title > h6")
@@ -115,7 +121,7 @@ export function componentsFactory(){
             title.textContent = ""
             item.dataset.status = "active"
             forgetBtn.dataset.thoughtId = ""
-            forgetBtn.dataset.bonus = ""
+            forgetBtn.dataset.bonus = 0
             slot.dataset.thoughtId = ""
             slot.style.backgroundColor = `#fff`
             slot.classList.add("empty")
