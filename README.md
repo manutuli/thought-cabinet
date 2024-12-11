@@ -21,10 +21,13 @@ A simple interface inspired by my favourite video game.
 ## Constraints and dependencies
   - Vanilla JS App.
   - State Management System.
+  - accessibility.
+  - use LocalStorage.
+  - use JSDocs.
 
 ## planning
   - sprint 1 : user page.
-  - sprint 2 : admin page.
+  - sprint 2 : state management.
 
 ## test cases 
   - Given there are thoughts in the list,

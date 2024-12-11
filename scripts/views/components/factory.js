@@ -108,13 +108,13 @@ export function componentsFactory(){
         }
         // 
         function forget({thoughtData}){
-            const id = thoughtData.id
+            const forgetBtn = document.querySelector("button.forget-thought")
+            const id = forgetBtn.dataset.thoughtId
             // 
             if (!id) return 
             const slot = document.querySelector(`.thought-slot[data-thought-id="${id}"]`)
             const item = document.querySelector(`p[data-thought-id="${id}"]`)
             const title = slot.querySelector(".thought-slot-title > h6")
-            const forgetBtn = document.querySelector("button.forget-thought")
             const internBtn = document.querySelector("button.thought-info-section")
             forgetBtn.textContent = ""
             internBtn.textContent = ""

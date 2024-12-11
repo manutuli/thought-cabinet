@@ -5,17 +5,23 @@ import {componentsFactory} from './scripts/views/components/factory.js'
 import { fetchAPI } from './scripts/model/model.js'
 //
 export default function app() {
-    const { publish, subscribe, state } = store()
+    const { publish, subscribe, dispatch, state } = store()
     const { infoData, isFormView, } = state
     const { gameUI } = componentsFactory()
     const { getThoughtsList } = fetchAPI
-    // 
     const root = document.getElementById("root")
+    // console.log(state)
+    // 
+    function initState({thoughtsList}){
+        thoughtsList.forEach((obj) => {
+            localStorage.setItem(obj.id, JSON.stringify(obj))
+        })
+    }
     const promise = getThoughtsList()
     promise.then( (value) => {
-        // subscribe("initState", (state) => null)
-        // publish("initState", {...state, thoughtsList : [...value]})
-        // console.log(value)
+        subscribe("initState", initState)
+        publish("initState", dispatch("initState", [...value]))
+        // 
         return root.appendChild(gameUI(value)) 
     })
 }

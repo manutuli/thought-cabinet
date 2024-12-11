@@ -13,6 +13,11 @@ let observers = {}
 
 function reducer(type, newState){
     switch (type) {
+        case "initState" : {
+            const [...thoughtsList] = newState
+            // 
+            return ({...state, thoughtsList})
+        }
         case "itemClick" : {
             const {...thoughtData} = newState
             // 
@@ -43,10 +48,9 @@ function reducer(type, newState){
         case "forget" : {
             let score = state.score
             score = score - parseInt(newState.bonus)
-            let [...slotsList] = state.slotsList
             // console.log("score : ", score)
             // 
-            return ({...state, slotsList, score})
+            return ({...state, score})
         }
         case "submit" : {
             let [...thoughtsList] = state.thoughtsList

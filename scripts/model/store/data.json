@@ -1,8 +1,9 @@
 [
     {
         "id" : 1,
-        "name" : "the thought title",
-        "description" : "thought description",
+        "name" : "sleepy time",
+        "description" : "sleepy, sleepy time, time to go to sleep!",
+        "revelation" : "but you never fall asleep...",
         "image" : "#daddad",
         "bonus" : 200
     },
@@ -10,6 +11,7 @@
         "id" : 2,
         "name" : "the other title",
         "description" : "the other description",
+        "revelation" : "it has been revealed to you",
         "image" : "#aabbcc",
         "bonus" : 200
     },
@@ -17,20 +19,23 @@
         "id" : 3,
         "name" : "and another title",
         "description" : "with another description",
+        "revelation" : "it has been revealed to you",
         "image" : "#ffbbcc",
         "bonus" : 200
     },
     {
         "id" : 4,
-        "name" : "yet  another title",
+        "name" : "yet another title",
         "description" : "and another description",
+        "revelation" : "it has been revealed to you",
         "image" : "#abffbc",
         "bonus" : 200
     },
     {
         "id" : 5,
-        "name" : "yet  another title",
-        "description" : "and another description",
+        "name" : "Anamnesis",
+        "description" : "You can't remember what anamnesis means",
+        "revelation" : "well, you'll remember, probably.",
         "image" : "purple",
         "bonus" : 200
     }

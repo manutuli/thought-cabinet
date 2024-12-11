@@ -5,7 +5,7 @@ import { fetchAPI } from "../../model/model.js"
 // 
 export function eventsFactory(){
     const { getThoughtById, } = fetchAPI
-    const { state, publish, dispatch } = store()
+    const { publish, dispatch } = store()
     // 
     function handleItemClick(e){
         e.preventDefault()
@@ -24,7 +24,6 @@ export function eventsFactory(){
     function handleSlotClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
-        console.log("id : ", id)
         // 
         if (!id) return
         const promise = getThoughtById(id)
