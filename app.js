@@ -6,11 +6,11 @@ import { fetchAPI } from './scripts/model/model.js'
 //
 export default function app() {
     const { publish, subscribe, dispatch, state } = store()
-    const { infoData, isFormView, } = state
+    // const { infoData, isFormView, } = state
     const { gameUI } = componentsFactory()
     const { getThoughtsList } = fetchAPI
     const root = document.getElementById("root")
-    // console.log(state)
+    // console.log(authAdminUser("user"))
     // 
     function initState({thoughtsList}){
         thoughtsList.forEach((obj) => {

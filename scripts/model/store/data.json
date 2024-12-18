@@ -1,11 +1,12 @@
 [
     {
         "id" : 1,
-        "name" : "sleepy time",
+        "name" : "sleep",
         "description" : "sleepy, sleepy time, time to go to sleep!",
         "revelation" : "but you never fall asleep...",
         "image" : "#daddad",
-        "bonus" : 200
+        "bonus" : 200,
+        "completed" : false
     },
     {
         "id" : 2,
@@ -13,7 +14,8 @@
         "description" : "the other description",
         "revelation" : "it has been revealed to you",
         "image" : "#aabbcc",
-        "bonus" : 200
+        "bonus" : 200,
+        "completed" : false
     },
     {
         "id" : 3,
@@ -21,7 +23,8 @@
         "description" : "with another description",
         "revelation" : "it has been revealed to you",
         "image" : "#ffbbcc",
-        "bonus" : 200
+        "bonus" : 200,
+        "completed" : false
     },
     {
         "id" : 4,
@@ -29,7 +32,8 @@
         "description" : "and another description",
         "revelation" : "it has been revealed to you",
         "image" : "#abffbc",
-        "bonus" : 200
+        "bonus" : 200,
+        "completed" : false
     },
     {
         "id" : 5,
@@ -37,6 +41,7 @@
         "description" : "You can't remember what anamnesis means",
         "revelation" : "well, you'll remember, probably.",
         "image" : "purple",
-        "bonus" : 200
+        "bonus" : 200,
+        "completed" : false
     }
 ]

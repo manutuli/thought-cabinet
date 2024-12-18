@@ -8,9 +8,8 @@ let state = {
     thoughtData : {},
     score : 0
 }
-
 let observers = {}
-
+// 
 function reducer(type, newState){
     switch (type) {
         case "initState" : {
@@ -20,6 +19,7 @@ function reducer(type, newState){
         }
         case "itemClick" : {
             const {...thoughtData} = newState
+            // console.log("state : ", state)
             // 
             return ({...state, thoughtData})
         }
@@ -59,10 +59,14 @@ function reducer(type, newState){
             // 
             return ({...state, thoughtsList})
         }
+        case "progress" : {
+            // 
+            // 
+            return ({...state,})
+        }
     }
 }
-
-
+// 
 export function store(){
     // 
     function dispatch(type, data){

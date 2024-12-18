@@ -6,6 +6,7 @@ A simple interface inspired by my favourite video game.
   - Display funny descriptions.
   - Internalize thoughts.
   - Gain bonuses from internalized thoughts.
+  - progress and complete thought.
   - Forget internalized thoughts.
 
 ### Admin page (uncomment "form-feature" lines in components)
@@ -26,8 +27,10 @@ A simple interface inspired by my favourite video game.
   - use JSDocs.
 
 ## planning
-  - sprint 1 : user page.
+  - sprint 1 : user page dom nodes.
   - sprint 2 : state management.
+  - sprint 3 : score.
+  - sprint 4 : role based authentication.
 
 ## test cases 
   - Given there are thoughts in the list,
