@@ -22,18 +22,8 @@ export const fetchAPI = {
             return error ? error : null
         }
     },
-    read : {
-        // thoughtsList
-    },
-    write : {
-        // thought
-    },
-    update : {
-        // thoughtsList
-        // thought
-    },
-    delete : {
-        // thought
-        // thoughtsList
-    },
+    // read 
+    // write 
+    // update 
+    // delete 
 }

@@ -14,7 +14,14 @@ export function componentsFactory(){
         handleOpenForm,
         handleCloseForm, } = eventsFactory()
         // 
-    function createInput(type, nameid, text){
+    /**
+     * 
+     * @param {String} type 
+     * @param {String} markupID 
+     * @param {String} text 
+     * @returns 
+     */
+    function createInput(type, markupID, text){
         const wrapper = document.createElement("span")
         const input = document.createElement("input") 
         const label = document.createElement("label")
@@ -22,11 +29,11 @@ export function componentsFactory(){
         input.classList.add("form-control", "mb-4")
         label.classList.add("input-group-text")
         input.setAttribute("type", type)
-        input.setAttribute("name", nameid)
-        input.setAttribute("id", nameid)
+        input.setAttribute("name", markupID)
+        input.setAttribute("id", markupID)
         input.setAttribute("required", "")
         
-        label.setAttribute("for", nameid)
+        label.setAttribute("for", markupID)
         label.textContent = text
         wrapper.appendChild(label)
         wrapper.appendChild(input)
@@ -135,7 +142,7 @@ export function componentsFactory(){
     /**
      * 
      * @param {Array} thoughtsList 
-     * @returns {NodeList}
+     * @returns {HTMLElement} Section
      */ 
     function createListSection(thoughtsList){
         const section = document.createElement("section");
@@ -155,7 +162,7 @@ export function componentsFactory(){
             title.addEventListener("click", handleItemClick)
             list.appendChild(item)
         })
-        // form-feature
+        // -- form-feature
         // list.appendChild(formBtn)
         // action 
         function itemClick({thoughtData}){
@@ -242,7 +249,11 @@ export function componentsFactory(){
         // 
         return button 
     }
-    // 
+    /**
+     * 
+     * @param {Array} thoughtsList 
+     * @returns {HTMLElement} Main
+     */
     function gameUI(thoughtsList){
         const main = document.createElement("main")
         const slots = createSlotSection()

@@ -4,7 +4,7 @@
         "name" : "sleep",
         "description" : "sleepy, sleepy time, time to go to sleep!",
         "revelation" : "but you never fall asleep...",
-        "image" : "#daddad",
+        "image" : "limegreen",
         "bonus" : 200,
         "completed" : false
     },
@@ -13,7 +13,7 @@
         "name" : "the other title",
         "description" : "the other description",
         "revelation" : "it has been revealed to you",
-        "image" : "#aabbcc",
+        "image" : "red",
         "bonus" : 200,
         "completed" : false
     },
@@ -22,7 +22,7 @@
         "name" : "and another title",
         "description" : "with another description",
         "revelation" : "it has been revealed to you",
-        "image" : "#ffbbcc",
+        "image" : "yellow",
         "bonus" : 200,
         "completed" : false
     },
@@ -31,7 +31,7 @@
         "name" : "yet another title",
         "description" : "and another description",
         "revelation" : "it has been revealed to you",
-        "image" : "#abffbc",
+        "image" : "cyan",
         "bonus" : 200,
         "completed" : false
     },
@@ -40,7 +40,7 @@
         "name" : "Anamnesis",
         "description" : "You can't remember what anamnesis means",
         "revelation" : "well, you'll remember, probably.",
-        "image" : "purple",
+        "image" : "lightgray",
         "bonus" : 200,
         "completed" : false
     }

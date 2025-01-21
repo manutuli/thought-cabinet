@@ -6,7 +6,11 @@ import { fetchAPI } from "../../model/model.js"
 export function eventsFactory(){
     const { getThoughtById, } = fetchAPI
     const { publish, dispatch } = store()
-    // 
+    /**
+     * 
+     * @param {Event} e 
+     * @returns State Update
+     */
     function handleItemClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
@@ -20,7 +24,11 @@ export function eventsFactory(){
             publish("itemClick", dispatch("itemClick", {...info}))
         })
     }
-    // 
+    /**
+     * 
+     * @param {Event} e 
+     * @returns State Update
+     */
     function handleSlotClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
@@ -33,7 +41,11 @@ export function eventsFactory(){
             publish("emptySlot", dispatch("emptySlot", {...info}))
         })
     }
-    // 
+    /**
+     * 
+     * @param {Event} e 
+     * @returns State Update
+     */
     function handleInternalize(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
@@ -46,7 +58,11 @@ export function eventsFactory(){
             publish("fillSlot", dispatch("fillSlot", {...info}))
         })
     }
-    // 
+    /**
+     * 
+     * @param {Event} e 
+     * @returns State Update
+     */
     function handleForget(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
@@ -55,7 +71,11 @@ export function eventsFactory(){
         if (!id) return
         publish("forget", dispatch("forget", {id, bonus}))
     }
-    // 
+    /**
+     * 
+     * @param {Event} e 
+     * @returns State Update
+     */
     function handleSubmit(e){
         e.preventDefault()
         const formData = new FormData(e.target)
@@ -70,12 +90,20 @@ export function eventsFactory(){
         publish("submit", dispatch("submit", thought))
         publish("closeForm", {isFormView : false})
     }
-    // 
+    /**
+     * 
+     * @param {Event} e 
+     * @returns State Update
+     */
     function handleCloseForm(e){
         e.preventDefault()
         publish("closeForm", {isFormView : false})
     }
-    // 
+    /**
+     * 
+     * @param {Event} e 
+     * @returns State Update
+     */
     function handleOpenForm(e){
         e.preventDefault()
         publish("openForm", {isFormView : true})
