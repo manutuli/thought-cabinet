@@ -32,7 +32,7 @@ export function eventsFactory(){
     function handleSlotClick(e){
         e.preventDefault()
         const id = e.target.dataset.thoughtId
-        // 
+        // console.log("id : ", id)
         if (!id) return
         const promise = getThoughtById(id)
         promise.then((info) => {

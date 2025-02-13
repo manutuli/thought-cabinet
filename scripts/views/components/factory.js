@@ -68,12 +68,12 @@ export function componentsFactory(){
         const section = document.createElement("section");
         const container = document.createElement("div")
         const forgetBtn = document.createElement("button")
-        section.classList.add( "card", "thought-slots-section")
+        section.classList.add( "card")
         container.classList.add( "container", "thought-slots-section")
         forgetBtn.classList.add("btn", "btn-outline-danger", "forget-thought")
         forgetBtn.addEventListener("click", handleForget)
         const slots = []
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 12; i++) {
             const slot = createSlot()
             slot.classList.add("empty")
             slot.dataset.slotId = i+1
