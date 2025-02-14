@@ -260,15 +260,16 @@ export function componentsFactory(){
         const list = createListSection(thoughtsList)
         const info = createInfoSection()
         const form = createFormModal()
-        info.classList.add("container", "p-5")
-        list.classList.add("container", "p-5")
-        slots.classList.add("container", "d-flex", "w-50", "flex-wrap")
-        main.classList.add("container-fluid", "col-md")
-        form.classList.add("container", "col-md")
+        // -- boostrap
+        // info.classList.add("container", "p-5")
+        // list.classList.add("container", "p-5")
+        // slots.classList.add("container", "d-flex", "w-50", "flex-wrap")
+        // main.classList.add("container-fluid", "col-md")
+        // form.classList.add("container", "col-md")
         main.appendChild(slots)
         main.appendChild(list)
         main.appendChild(info)
-        // form-feature 
+        // -- form-feature 
         // main.appendChild(form)
         // 
         return main
